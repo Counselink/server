@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class ClientJpaRepository {
+public class UserJpaRepository {
 
     private final EntityManager em;
 
@@ -23,11 +23,11 @@ public class ClientJpaRepository {
     }
 
     public List<User> findAll() {
-        return em.createQuery("select c from User c", User.class).getResultList();
+        return em.createQuery("select u from User u", User.class).getResultList();
     }
 
     public List<User> findByName(String name) {
-        return em.createQuery("select c from User c where c.clientName =: name", User.class)
+        return em.createQuery("select u from User u where u.userName =: name", User.class)
                 .setParameter("name", name)
                 .getResultList();
     }

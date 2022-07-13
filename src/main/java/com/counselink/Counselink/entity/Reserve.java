@@ -29,13 +29,13 @@ public class Reserve {
     @JoinColumn(name = "user_id")
     private User user;
     private LocalDateTime reserveDate;
-    
+
     @OneToMany(mappedBy = "reserve")
     private final List<CounselInformation> counselInformationList = new ArrayList<>();
 
     @OneToOne(fetch = LAZY)
-    @JoinColumn(name = "clientreivew_id")
-    private ClientReview clientReview;
+    @JoinColumn(name = "userreivew_id")
+    private UserReview userReview;
 
     @OneToOne(fetch = LAZY)
     @JoinColumn(name = "counselorreport_id")
@@ -56,6 +56,11 @@ public class Reserve {
     public void addCounselInformation(CounselInformation counselInformation) {
         counselInformationList.add(counselInformation);
         counselInformation.setReserve(this);
+    }
+
+    public void setUserReview(UserReview userReview) {
+        this.userReview = userReview;
+        userReview.setReserve(this);
     }
 
     public void setCounselorReport(CounselorReport counselorReport) {

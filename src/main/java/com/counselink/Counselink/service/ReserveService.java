@@ -4,7 +4,7 @@ import com.counselink.Counselink.entity.CounselInformation;
 import com.counselink.Counselink.entity.Reserve;
 import com.counselink.Counselink.entity.member.Counselor;
 import com.counselink.Counselink.entity.member.User;
-import com.counselink.Counselink.repository.ClientJpaRepository;
+import com.counselink.Counselink.repository.UserJpaRepository;
 import com.counselink.Counselink.repository.CounselInformationJpaRepository;
 import com.counselink.Counselink.repository.CounselorJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,14 +20,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReserveService {
 
-    private final ClientJpaRepository clientJpaRepository;
+    private final UserJpaRepository userJpaRepository;
     private final CounselorJpaRepository counselorJpaRepository;
     private final CounselInformationJpaRepository counselInformationJpaRepository;
 
     @Transactional
-    public long Reserve(Long clientId, Long counselorId, List<Long> counselInformationId) {
+    public long Reserve(Long userId, Long counselorId, List<Long> counselInformationId) {
 
-        User user = clientJpaRepository.findOne(clientId);
+        User user = userJpaRepository.findOne(userId);
         Counselor counselor = counselorJpaRepository.findOne(counselorId);
 
         List<CounselInformation> counselInformationList = new ArrayList<>();

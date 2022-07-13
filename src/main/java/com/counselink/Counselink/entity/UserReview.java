@@ -10,10 +10,10 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ClientReview {
+public class UserReview {
 
     @Id @GeneratedValue
-    @Column(name = "clientreivew_id")
+    @Column(name = "userreivew_id")
     private Long id;
     private LocalDateTime localDateTime;
 
@@ -21,6 +21,10 @@ public class ClientReview {
     private String content;
     private int stars;
 
-    @OneToOne(mappedBy = "clientReview")
+    @OneToOne(mappedBy = "userReview")
     private Reserve reserve;
+
+    public void setReserve(Reserve reserve) {
+        this.reserve = reserve;
+    }
 }
