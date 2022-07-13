@@ -29,11 +29,7 @@ public class CounselInformation {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "counselor_id")
     private Counselor counselor;
-
-    // 없는게 맞는듯 함. 단방향으로 해야 함
-//    @OneToOne(mappedBy = "counselInformation", fetch = LAZY)
-//    private ReservedCounsel reservedCounsel;
-
+    
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "reserve_id")
     private Reserve reserve;
