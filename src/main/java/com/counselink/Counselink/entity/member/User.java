@@ -2,10 +2,7 @@ package com.counselink.Counselink.entity.member;
 
 import com.counselink.Counselink.entity.Address;
 import com.counselink.Counselink.entity.Reserve;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -37,6 +34,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private final List<Reserve> reserveList = new ArrayList<>();
 
+    @Builder
     public User(String userName, String phoneNumber, String email, String loginId, String loginPassword, Date registerDate, Address address) {
         this.userName = userName;
         this.phoneNumber = phoneNumber;
