@@ -29,11 +29,7 @@ public class Reserve {
     @JoinColumn(name = "user_id")
     private User user;
     private LocalDateTime reserveDate;
-
-//    @OneToOne(fetch = LAZY)
-//    @JoinColumn(name = "counselinformation_id")
-//    private CounselInformation counselInformation;
-
+    
     @OneToMany(mappedBy = "reserve")
     private final List<CounselInformation> counselInformationList = new ArrayList<>();
 
