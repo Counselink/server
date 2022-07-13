@@ -18,8 +18,17 @@ public class UserService {
     // 회원가입
     @Transactional
     public Long join(User user) {
+
+        validateDuplicateUser(user);
         userJpaRepository.save(user);
         return user.getId();
+    }
+
+    // 디비에 중복회원 검증(동시 회원가입 문제는 해결 안됨)
+    private void validateDuplicateUser(User user) {
+        if (userJpaRepository.findByName(user.getUserName()).size() > 0) {
+            throw new IllegalStateException("이미 존재하는 회원 입니다.");
+        }
     }
 
     public List<User> findAll() {
