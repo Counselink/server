@@ -1,10 +1,7 @@
 package com.counselink.Counselink.entity.member;
 
 import com.counselink.Counselink.entity.CounselInformation;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -36,5 +33,17 @@ public class Counselor {
 
     public void changeCounselorName(String counselorName) {
         this.counselorName = counselorName;
+    }
+
+    @Builder
+    public Counselor(String counselorName, String phoneNumber, String email, String loginId, String loginPassword, Date registerDate, String career, String profileImageUrl) {
+        this.counselorName = counselorName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.loginId = loginId;
+        this.loginPassword = loginPassword;
+        this.registerDate = registerDate;
+        this.career = career;
+        this.profileImageUrl = profileImageUrl;
     }
 }
