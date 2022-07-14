@@ -29,8 +29,12 @@ public class Reserve {
     @JoinColumn(name = "user_id")
     private User user;
     private LocalDateTime reserveDate;
+    private LocalDateTime startCounselTime;
+    private LocalDateTime endCounselTime;
 
-    @OneToMany(mappedBy = "reserve")
+    private Integer totalPrice;
+
+    @OneToMany(mappedBy = "reserve", cascade = CascadeType.ALL)
     private final List<CounselInformation> counselInformationList = new ArrayList<>();
 
     @OneToOne(fetch = LAZY)
@@ -43,8 +47,19 @@ public class Reserve {
 
     // Setter
     // builder 패턴으로 바꿔야 한다.
-    public void setReserveDate(LocalDateTime reserveDate) {
+    private void setReserveDate(LocalDateTime reserveDate) {
         this.reserveDate = reserveDate;
+    }
+
+    // 상담 시간
+    public void setCounselTime() {
+        this.startCounselTime = counselInformationList.get(0).getCounselStartTime();
+        this.endCounselTime = counselInformationList.get(0).getCounselStartTime().plusMinutes(30L * counselInformationList.size());
+    }
+
+    // 예약 가격
+    private void setTotalPrice() {
+        this.totalPrice = counselInformationList.stream().mapToInt(CounselInformation::getPrice).sum();
     }
 
     // 연관 관계 메서드
@@ -71,37 +86,30 @@ public class Reserve {
     // 비지니스 로직
     // 예약 신청
     // CounselInformation DTO 써야 한다.
-    public static Reserve createReserve(User user, Counselor counselor, List<CounselInformation> counselInformation) {
+    public static Reserve createReserve(User user, List<CounselInformation> counselInformationList) {
         Reserve reserve = new Reserve();
 
         reserve.setUser(user);
-        for (CounselInformation information : counselInformation) {
-            reserve.addCounselInformation(information);
-            information.setStatus(RESERVE);
+        for (CounselInformation counselInformation : counselInformationList) {
+            reserve.addCounselInformation(counselInformation);
+            counselInformation.setStatus(RESERVE);
         }
         reserve.setReserveDate(LocalDateTime.now());
-
+        reserve.setCounselTime();
+        reserve.setTotalPrice();
         return reserve;
     }
 
     // 예약 취소
     public void cancel() {
         if(counselInformationList.get(0).getStatus() == RESERVE) {
-            try {
-                throw new Exception();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            throw new IllegalStateException("이미 상담이 끝난 예약입니다.");
         }
         for (CounselInformation counselInformation : counselInformationList) {
             counselInformation.setStatus(READY);
         }
-
     }
 
     // 조회 로직
-    // 예약 가격
-    public int getTotalPrice() {
-        return counselInformationList.stream().mapToInt(CounselInformation::getPrice).sum();
-    }
+
 }
