@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+import static com.counselink.Counselink.entity.ReservationStatus.*;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
@@ -29,7 +30,7 @@ public class CounselInformation {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "counselor_id")
     private Counselor counselor;
-    
+
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "reserve_id")
     private Reserve reserve;
@@ -71,7 +72,7 @@ public class CounselInformation {
         counselInformation.setCounselStartTime(counselStartTime);
         counselInformation.setPrice(price);
         counselInformation.setCounselor(counselor);
-
+        counselInformation.setStatus(READY);
         return counselInformation;
     }
 }
