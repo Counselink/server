@@ -75,7 +75,6 @@ public class Reserve {
 
     public void setUserReview(UserReview userReview) {
         this.userReview = userReview;
-        userReview.setReserve(this);
     }
 
     public void setCounselorReport(CounselorReport counselorReport) {

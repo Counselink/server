@@ -2,10 +2,8 @@ package com.counselink.Counselink.service;
 
 import com.counselink.Counselink.entity.CounselInformation;
 import com.counselink.Counselink.entity.Reserve;
-import com.counselink.Counselink.entity.member.Counselor;
 import com.counselink.Counselink.entity.member.User;
 import com.counselink.Counselink.repository.CounselInformationJpaRepository;
-import com.counselink.Counselink.repository.CounselorJpaRepository;
 import com.counselink.Counselink.repository.ReserveJpaRepository;
 import com.counselink.Counselink.repository.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
