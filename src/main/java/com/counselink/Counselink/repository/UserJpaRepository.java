@@ -2,6 +2,7 @@ package com.counselink.Counselink.repository;
 
 import com.counselink.Counselink.entity.member.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
