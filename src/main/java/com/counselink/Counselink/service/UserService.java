@@ -2,10 +2,12 @@ package com.counselink.Counselink.service;
 
 import com.counselink.Counselink.entity.member.User;
 import com.counselink.Counselink.repository.UserJpaRepository;
+import com.counselink.Counselink.repository.spring_data_jpa.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 // 더티 체킹 등을 안해서 성능 면에서 좋다.(readOnly)
@@ -14,6 +16,7 @@ import java.util.List;
 public class UserService {
 
     private final UserJpaRepository userJpaRepository;
+    private final UserRepository userRepository;
 
     // 회원가입
     @Transactional
@@ -31,11 +34,29 @@ public class UserService {
         }
     }
 
+    private boolean isSignupValid(String loginId) {
+        Optional<User> users = userRepository.findByLoginId(loginId);
+
+        if (users.isPresent()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     public List<User> findAll() {
         return userJpaRepository.findAll();
     }
 
     public User findOne(Long id) {
         return userJpaRepository.findOne(id);
+    }
+
+    @Transactional
+    public User saveUser(User user) {
+        if (isSignupValid(user.getLoginId())) {
+            return userRepository.saveAndFlush(user);
+        } else {
+            return null;
+        }
     }
 }
