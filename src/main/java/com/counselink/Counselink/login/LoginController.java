@@ -44,7 +44,7 @@ public class LoginController {
         HttpServletRequest request
     ) {
         if (userService.isLoginValid(user)) {
-            return ResponseEntity.ok().body(user2.toString());
+            return ResponseEntity.ok().body(null);
         } else {
             return ResponseEntity.badRequest().body(null);
         }
