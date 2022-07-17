@@ -17,10 +17,10 @@ import java.util.List;
 @Table(name = "users")
 public class User {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private Long id;
-    @Column(unique = true, nullable = false)
+    @Column(unique = true) // user name 은 동명이인 일 수 있다.
     private String userName;
     private String phoneNumber;
     private String email;
