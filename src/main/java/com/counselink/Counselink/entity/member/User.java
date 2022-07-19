@@ -17,10 +17,10 @@ import java.util.List;
 @Table(name = "users")
 public class User {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue()
     @Column(name = "user_id")
     private Long id;
-    @Column(name = "user_name", unique = true, nullable = false)
+    @Column(name = "user_name")
     private String userName;
     @Column(name = "phone_number")
     private String phoneNumber;
