@@ -20,19 +20,26 @@ public class User {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private Long id;
-    @Column(unique = true) // user name 은 동명이인 일 수 있다.
+    @Column(name = "user_name", unique = true, nullable = false)
     private String userName;
+    @Column(name = "phone_number")
     private String phoneNumber;
+    @Column(name = "email")
     private String email;
+    @Column(name = "login_id")
     private String loginId;
+    @Column(name = "login_password")
     private String loginPassword;
+    @Column(name = "register_date")
     private LocalDateTime registerDate;
 
     @Embedded
+    @Column(name = "address")
     private Address address;
 
     // mappedBy로 데이터를 변경해도 변경되지 않는다.
     @OneToMany(mappedBy = "user")
+    @Column(name = "reserver_list")
     private final List<Reserve> reserveList = new ArrayList<>();
 
     @Builder

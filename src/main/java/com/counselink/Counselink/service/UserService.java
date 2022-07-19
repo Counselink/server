@@ -6,6 +6,7 @@ import com.counselink.Counselink.repository.spring_data_jpa.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -34,15 +35,20 @@ public class UserService {
         }
     }
 
-    private boolean isSignupValid(String loginId) {
+
+    public boolean isSignupValid(String loginId, String loginPassword) {
         Optional<User> users = userRepository.findByLoginId(loginId);
 
-        if (users.isPresent()) {
-            return false;
-        } else {
-            return true;
-        }
+        return users.isEmpty();
     }
+
+    public boolean isLoginValid(User user) {
+        Optional<User> findUser = userRepository.findByLoginId(user.getLoginId());
+
+        return findUser.isPresent();
+    }
+
+
     public List<User> findAll() {
         return userJpaRepository.findAll();
     }
@@ -53,10 +59,11 @@ public class UserService {
 
     @Transactional
     public User saveUser(User user) {
-        if (isSignupValid(user.getLoginId())) {
-            return userRepository.saveAndFlush(user);
-        } else {
-            return null;
-        }
+//        if (isSignupValid(user.getLoginId())) {
+//            return userRepository.saveAndFlush(user);
+//        } else {
+//            return null;
+//        }
+        return userRepository.saveAndFlush(user);
     }
 }
