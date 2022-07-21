@@ -1,4 +1,4 @@
-package com.counselink.Counselink.register;
+package com.counselink.Counselink.api.register;
 
 
 import com.counselink.Counselink.entity.member.Counselor;
