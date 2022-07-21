@@ -1,8 +1,7 @@
 package com.counselink.Counselink.service;
 
 import com.counselink.Counselink.entity.member.User;
-import com.counselink.Counselink.repository.UserJpaRepository;
-import com.counselink.Counselink.repository.spring_data_jpa.UserRepository;
+import com.counselink.Counselink.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +15,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserJpaRepository userJpaRepository;
     private final UserRepository userRepository;
 
     // 회원가입
@@ -24,13 +22,13 @@ public class UserService {
     public Long join(User user) {
 
         validateDuplicateUser(user);
-        userJpaRepository.save(user);
+        userRepository.save(user);
         return user.getId();
     }
 
     // 디비에 중복회원 검증(동시 회원가입 문제는 해결 안됨)
     private void validateDuplicateUser(User user) {
-        if (userJpaRepository.findByName(user.getUserName()).size() > 0) {
+        if (userRepository.findByUserName(user.getUserName()).get().size() > 0) {
             throw new IllegalStateException("이미 존재하는 회원 입니다.");
         }
     }
@@ -50,11 +48,11 @@ public class UserService {
 
 
     public List<User> findAll() {
-        return userJpaRepository.findAll();
+        return userRepository.findAll();
     }
 
     public User findOne(Long id) {
-        return userJpaRepository.findOne(id);
+        return userRepository.findById(id).get();
     }
 
     @Transactional

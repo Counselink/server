@@ -1,4 +1,4 @@
-package com.counselink.Counselink.repository.spring_data_jpa;
+package com.counselink.Counselink.repository;
 
 import com.counselink.Counselink.entity.member.Counselor;
 import org.springframework.data.jpa.repository.JpaRepository;
