@@ -5,7 +5,7 @@ import com.counselink.Counselink.entity.UserReview;
 import com.counselink.Counselink.entity.member.User;
 import com.counselink.Counselink.repository.ReserveRepository;
 import com.counselink.Counselink.repository.UserRepository;
-import com.counselink.Counselink.repository.UserReviewRepository;
+import com.counselink.Counselink.repository.user_review.UserReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
