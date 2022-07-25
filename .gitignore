@@ -223,4 +223,8 @@ gradle-app.setting
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
+build.gradle
+application.yaml
+application.yml
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,intellij,java,gradle
