@@ -1,7 +1,6 @@
 package com.counselink.Counselink.service;
 
 import com.counselink.Counselink.entity.member.Counselor;
-import com.counselink.Counselink.entity.member.User;
 import com.counselink.Counselink.repository.spring_data_jpa.CounselorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
