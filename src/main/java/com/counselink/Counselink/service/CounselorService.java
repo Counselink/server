@@ -1,7 +1,7 @@
 package com.counselink.Counselink.service;
 
 import com.counselink.Counselink.entity.member.Counselor;
-import com.counselink.Counselink.repository.CounselorRepository;
+import com.counselink.Counselink.repository.counselor.CounselorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,11 +19,7 @@ public class CounselorService {
     private boolean isSignupValid(String loginId) {
         Optional<Counselor> tmp = counselorRepository.findByLoginId(loginId);
 
-        if (tmp.isPresent()) {
-            return false;
-        } else {
-            return true;
-        }
+        return tmp.isEmpty();
     }
 
     @Transactional

@@ -19,7 +19,7 @@ public class UserReviewApiController {
     @GetMapping("/api/homepage/review")
     public Result<List<HomePageUserReviewDto>> GetHomepageUserReview() {
         List<HomePageUserReviewDto> userReviewOnHomepage = userReviewRepository.findHomepageUserReview();
-        
+
         return new Result<>(userReviewOnHomepage);
     }
 

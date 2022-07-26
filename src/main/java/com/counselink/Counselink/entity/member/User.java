@@ -17,21 +17,16 @@ import java.util.List;
 @Table(name = "users")
 public class User {
 
-    @Id @GeneratedValue()
+    @Id
+    @GeneratedValue()
     @Column(name = "user_id")
     private Long id;
-    @Column(name = "user_name")
     private String userName;
     private Integer age;
-    @Column(name = "phone_number")
     private String phoneNumber;
-    @Column(name = "email")
     private String email;
-    @Column(name = "login_id")
     private String loginId;
-    @Column(name = "login_password")
     private String loginPassword;
-    @Column(name = "register_date")
     private LocalDateTime registerDate;
 
     @Embedded
@@ -40,12 +35,12 @@ public class User {
 
     // mappedBy로 데이터를 변경해도 변경되지 않는다.
     @OneToMany(mappedBy = "user")
-    @Column(name = "reserver_list")
     private final List<Reserve> reserveList = new ArrayList<>();
 
     @Builder
-    public User(String userName, String phoneNumber, String email, String loginId, String loginPassword, Address address) {
+    public User(String userName, Integer age, String phoneNumber, String email, String loginId, String loginPassword, Address address) {
         this.userName = userName;
+        this.age = age;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.loginId = loginId;
@@ -55,7 +50,7 @@ public class User {
     }
 
     public void changeUserName(String userName) {
-        this.userName= userName;
+        this.userName = userName;
     }
 
 }

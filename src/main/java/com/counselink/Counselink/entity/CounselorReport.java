@@ -12,7 +12,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CounselorReport {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "counselorreport_id")
     private Long id;
     private LocalDateTime localDateTime;

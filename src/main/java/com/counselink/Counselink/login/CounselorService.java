@@ -1,7 +1,7 @@
 package com.counselink.Counselink.login;
 
 import com.counselink.Counselink.entity.member.Counselor;
-import com.counselink.Counselink.repository.spring_data_jpa.CounselorRepository;
+import com.counselink.Counselink.repository.counselor.CounselorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +18,8 @@ public class CounselorService {
     @Transactional
     public void isLoginValid(Counselor counselor) throws Exception {
         Optional<Counselor> counselors = counselorRepository.findByEmailAndLoginPassword(counselor);
-        if (!counselors.isPresent()) {throw new Exception("login is not valid");}
+        if (!counselors.isPresent()) {
+            throw new Exception("login is not valid");
+        }
     }
 }

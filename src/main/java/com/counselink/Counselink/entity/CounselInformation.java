@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-import static com.counselink.Counselink.entity.ReservationStatus.*;
+import static com.counselink.Counselink.entity.ReservationStatus.READY;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity

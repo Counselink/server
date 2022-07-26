@@ -10,7 +10,7 @@ public enum ErrorCode {
     USER_NOT_FOUND(404, HttpStatus.BAD_REQUEST, "User not exist.");
     // Can add custom error code of Exceptions
 
-    private int status;
-    private HttpStatus errorCode;
-    private String message;
+    private final int status;
+    private final HttpStatus errorCode;
+    private final String message;
 }

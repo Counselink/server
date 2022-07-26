@@ -1,4 +1,4 @@
-package com.counselink.Counselink.repository;
+package com.counselink.Counselink.repository.counselor;
 
 import lombok.Data;
 

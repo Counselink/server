@@ -1,11 +1,9 @@
 package com.counselink.Counselink.entity;
 
-import com.counselink.Counselink.entity.member.Counselor;
 import com.counselink.Counselink.entity.member.User;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -22,21 +20,18 @@ import static javax.persistence.FetchType.LAZY;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Reserve {
 
-    @Id @GeneratedValue
+    @OneToMany(mappedBy = "reserve", cascade = CascadeType.ALL)
+    private final List<CounselInformation> counselInformationList = new ArrayList<>();
+    @Id
+    @GeneratedValue
     private Long id;
-
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "user_id")
     private User user;
     private LocalDateTime reserveDate;
     private LocalDateTime startCounselTime;
     private LocalDateTime endCounselTime;
-
     private Integer totalPrice;
-
-    @OneToMany(mappedBy = "reserve", cascade = CascadeType.ALL)
-    private final List<CounselInformation> counselInformationList = new ArrayList<>();
-
     @OneToOne(fetch = LAZY)
     @JoinColumn(name = "userreivew_id")
     private UserReview userReview;
@@ -44,6 +39,23 @@ public class Reserve {
     @OneToOne(fetch = LAZY)
     @JoinColumn(name = "counselorreport_id")
     private CounselorReport counselorReport;
+
+    // 비지니스 로직
+    // 예약 신청
+    // CounselInformation DTO 써야 한다.
+    public static Reserve createReserve(User user, List<CounselInformation> counselInformationList) {
+        Reserve reserve = new Reserve();
+
+        reserve.setUser(user);
+        for (CounselInformation counselInformation : counselInformationList) {
+            reserve.addCounselInformation(counselInformation);
+            counselInformation.setStatus(RESERVE);
+        }
+        reserve.setReserveDate(LocalDateTime.now());
+        reserve.setCounselTime();
+        reserve.setTotalPrice();
+        return reserve;
+    }
 
     // Setter
     // builder 패턴으로 바꿔야 한다.
@@ -82,26 +94,9 @@ public class Reserve {
         counselorReport.setReserve(this);
     }
 
-    // 비지니스 로직
-    // 예약 신청
-    // CounselInformation DTO 써야 한다.
-    public static Reserve createReserve(User user, List<CounselInformation> counselInformationList) {
-        Reserve reserve = new Reserve();
-
-        reserve.setUser(user);
-        for (CounselInformation counselInformation : counselInformationList) {
-            reserve.addCounselInformation(counselInformation);
-            counselInformation.setStatus(RESERVE);
-        }
-        reserve.setReserveDate(LocalDateTime.now());
-        reserve.setCounselTime();
-        reserve.setTotalPrice();
-        return reserve;
-    }
-
     // 예약 취소
     public void cancel() {
-        if(counselInformationList.get(0).getStatus() == RESERVE) {
+        if (counselInformationList.get(0).getStatus() == RESERVE) {
             throw new IllegalStateException("이미 상담이 끝난 예약입니다.");
         }
         for (CounselInformation counselInformation : counselInformationList) {

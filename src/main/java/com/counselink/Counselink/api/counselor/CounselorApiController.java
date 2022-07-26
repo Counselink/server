@@ -1,7 +1,7 @@
 package com.counselink.Counselink.api.counselor;
 
-import com.counselink.Counselink.repository.CounselorRepository;
-import com.counselink.Counselink.repository.HomePageCounselorDto;
+import com.counselink.Counselink.repository.counselor.CounselorRepository;
+import com.counselink.Counselink.repository.counselor.HomePageCounselorDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
