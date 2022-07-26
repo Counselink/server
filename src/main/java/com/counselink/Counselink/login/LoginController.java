@@ -23,20 +23,6 @@ public class LoginController {
         this.userService = userService;
     }
 
-    // 회원 가입.
-    @PostMapping(path = "/signup")
-    public ResponseEntity<?> signup(
-        @RequestBody User user,
-        HttpServletRequest request
-    ) {
-        if (userService.isSignupValid(user.getLoginId(), user.getLoginPassword())) {
-            userService.saveUser(user);
-            return ResponseEntity.ok().body(user.toString());
-        } else {
-            return ResponseEntity.badRequest().body(null);
-        }
-    }
-
     // 로그인
     @PostMapping(path = "/login")
     public ResponseEntity<?> login(
