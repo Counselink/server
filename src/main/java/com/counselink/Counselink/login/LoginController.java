@@ -2,6 +2,7 @@ package com.counselink.Counselink.login;
 
 import com.counselink.Counselink.entity.member.User;
 import com.counselink.Counselink.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,26 +15,17 @@ import javax.transaction.Transactional;
 
 @Controller
 @RequestMapping(value = "/api/login")
+@RequiredArgsConstructor
 public class LoginController {
 
     private final UserService userService;
 
-    @Autowired
-    public LoginController(UserService userService) {
-        this.userService = userService;
-    }
-
     // 로그인
     @PostMapping(path = "/login")
     public ResponseEntity<?> login(
-        @RequestBody User user,
-        HttpServletRequest request
+        @RequestBody User user
     ) {
-        if (userService.isLoginValid(user)) {
-            return ResponseEntity.ok().body(null);
-        } else {
-            return ResponseEntity.badRequest().body(null);
-        }
+        userService.isLoginValid(user);
+        return ResponseEntity.ok().body(null);
     }
-
 }
