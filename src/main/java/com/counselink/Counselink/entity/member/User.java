@@ -5,8 +5,8 @@ import com.counselink.Counselink.entity.Reserve;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,10 +17,10 @@ import java.util.List;
 @Table(name = "users")
 public class User {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue()
     @Column(name = "user_id")
     private Long id;
-    @Column(name = "user_name", unique = true, nullable = false)
+    @Column(name = "user_name")
     private String userName;
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -31,7 +31,7 @@ public class User {
     @Column(name = "login_password")
     private String loginPassword;
     @Column(name = "register_date")
-    private Date registerDate;
+    private LocalDateTime registerDate;
 
     @Embedded
     @Column(name = "address")
@@ -43,13 +43,13 @@ public class User {
     private final List<Reserve> reserveList = new ArrayList<>();
 
     @Builder
-    public User(String userName, String phoneNumber, String email, String loginId, String loginPassword, Date registerDate, Address address) {
+    public User(String userName, String phoneNumber, String email, String loginId, String loginPassword, Address address) {
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.loginId = loginId;
         this.loginPassword = loginPassword;
-        this.registerDate = registerDate;
+        this.registerDate = LocalDateTime.now();
         this.address = address;
     }
 

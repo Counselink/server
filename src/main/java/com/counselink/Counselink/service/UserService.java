@@ -35,25 +35,19 @@ public class UserService {
         }
     }
 
+
     public boolean isSignupValid(String loginId, String loginPassword) {
         Optional<User> users = userRepository.findByLoginId(loginId);
 
-        if (users.isPresent()) {
-            return false;
-        } else {
-            return true;
-        }
+        return users.isPresent();
     }
 
     public boolean isLoginValid(User user) {
-        Optional<User> _user = userRepository.findByEmailAndLoginPassword(user);
+        Optional<User> findUser = userRepository.findByLoginId(user.getLoginId());
 
-        if (_user.isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
+        return findUser.isPresent();
     }
+
 
     public List<User> findAll() {
         return userJpaRepository.findAll();
@@ -65,6 +59,11 @@ public class UserService {
 
     @Transactional
     public User saveUser(User user) {
+//        if (isSignupValid(user.getLoginId())) {
+//            return userRepository.saveAndFlush(user);
+//        } else {
+//            return null;
+//        }
         return userRepository.saveAndFlush(user);
     }
 }
