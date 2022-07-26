@@ -10,8 +10,12 @@ public class HomePageUserReviewDto {
     private final Integer stars;
 
     public HomePageUserReviewDto(Integer age, String userName, String content, Integer stars) {
+
+        char c = userName.charAt(0);
+        int length = userName.length() - 1;
+
         this.age = age;
-        this.userName = userName;
+        this.userName = c + "*".repeat(length);
         this.content = content;
         this.stars = stars;
     }
