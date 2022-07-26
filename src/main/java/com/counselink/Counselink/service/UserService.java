@@ -60,7 +60,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User findOne(Long id) {
+    public User findById(Long id) {
         return userRepository.findById(id).get();
     }
 
@@ -72,5 +72,11 @@ public class UserService {
 //            return null;
 //        }
         return userRepository.saveAndFlush(user);
+    }
+
+    @Transactional
+    public void update(Long id, String name) {
+        User user = userRepository.findById(id).get();
+        user.changeUserName(name);
     }
 }
