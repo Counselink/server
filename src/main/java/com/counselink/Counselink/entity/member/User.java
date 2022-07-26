@@ -22,6 +22,7 @@ public class User {
     private Long id;
     @Column(name = "user_name")
     private String userName;
+    private Integer age;
     @Column(name = "phone_number")
     private String phoneNumber;
     @Column(name = "email")
