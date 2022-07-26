@@ -1,8 +1,9 @@
 package com.counselink.Counselink.login;
 
+import com.counselink.Counselink.common.exception.InvalidLoginException;
 import com.counselink.Counselink.entity.member.User;
 import com.counselink.Counselink.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,18 +11,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
+import java.text.ParseException;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping(value = "/api/login")
 public class LoginController {
 
     private final UserService userService;
-
-    @Autowired
-    public LoginController(UserService userService) {
-        this.userService = userService;
-    }
 
     // 회원 가입.
     @PostMapping(path = "/signup")
@@ -40,14 +37,9 @@ public class LoginController {
     // 로그인
     @PostMapping(path = "/login")
     public ResponseEntity<?> login(
-        @RequestBody User user,
-        HttpServletRequest request
-    ) {
-        if (userService.isLoginValid(user)) {
-            return ResponseEntity.ok().body(null);
-        } else {
-            return ResponseEntity.badRequest().body(null);
-        }
+        @RequestBody User user
+    ) throws InvalidLoginException {
+        userService.isLoginValid(user);
+        return ResponseEntity.ok().body("login is done.");
     }
-
 }
