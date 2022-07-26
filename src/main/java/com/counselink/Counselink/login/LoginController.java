@@ -32,7 +32,7 @@ public class LoginController {
     }
 
     // Counselor Login
-    @PostMapping(path = "/userLogin")
+    @PostMapping(path = "/counselorLogin")
     public ResponseEntity<?> counselorLogin(
             @RequestBody Counselor counselor
     ) throws Exception {
