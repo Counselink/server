@@ -17,7 +17,7 @@ public class CounselorService {
 
     @Transactional
     public void isLoginValid(Counselor counselor) throws Exception {
-        Optional<Counselor> counselors = counselorRepository.findByEmail(counselor);
+        Optional<Counselor> counselors = counselorRepository.findByEmailAndLoginPassword(counselor);
         if (!counselors.isPresent()) {throw new Exception("login is not valid");}
     }
 }

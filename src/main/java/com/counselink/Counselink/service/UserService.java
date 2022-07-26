@@ -46,7 +46,7 @@ public class UserService {
     }
 
     public boolean isLoginValid(User user) {
-        Optional<User> _user = userRepository.findByLoginId(user.getLoginId());
+        Optional<User> _user = userRepository.findByEmailAndLoginPassword(user);
 
         if (_user.isPresent()) {
             return true;
