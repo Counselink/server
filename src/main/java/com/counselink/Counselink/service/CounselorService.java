@@ -23,6 +23,14 @@ public class CounselorService {
     }
 
     @Transactional
+    public void isLoginValidV2(Counselor counselor) throws Exception {
+        Optional<Counselor> counselors = counselorRepository.findByLoginIdAndLoginPassword(counselor.getLoginId(), counselor.getLoginPassword());
+        if (!counselors.isPresent()) {
+            throw new Exception("login is not valid");
+        }
+    }
+
+    @Transactional
     public Counselor saveCounselor(Counselor counselor) {
         if (isSignupValid(counselor.getLoginId())) {
             return counselorRepository.saveAndFlush(counselor);

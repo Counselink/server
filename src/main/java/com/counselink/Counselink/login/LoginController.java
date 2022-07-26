@@ -2,6 +2,7 @@ package com.counselink.Counselink.login;
 
 import com.counselink.Counselink.entity.member.Counselor;
 import com.counselink.Counselink.entity.member.User;
+import com.counselink.Counselink.service.CounselorService;
 import com.counselink.Counselink.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class LoginController {
     public ResponseEntity<?> counselorLogin(
             @RequestBody Counselor counselor
     ) throws Exception {
-        counselorService.isLoginValid(counselor);
+        counselorService.isLoginValidV2(counselor);
         return ResponseEntity.ok().body(null);
 
     }
