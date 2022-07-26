@@ -1,12 +1,16 @@
 package com.counselink.Counselink.service;
 
+import com.counselink.Counselink.common.exception.ErrorCode;
+import com.counselink.Counselink.common.exception.InvalidLoginException;
 import com.counselink.Counselink.entity.member.User;
 import com.counselink.Counselink.repository.UserJpaRepository;
 import com.counselink.Counselink.repository.spring_data_jpa.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +18,7 @@ import java.util.Optional;
 // 더티 체킹 등을 안해서 성능 면에서 좋다.(readOnly)
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
     private final UserJpaRepository userJpaRepository;
@@ -39,13 +44,17 @@ public class UserService {
     public boolean isSignupValid(String loginId, String loginPassword) {
         Optional<User> users = userRepository.findByLoginId(loginId);
 
-        return users.isEmpty();
+        return users.isPresent();
     }
 
-    public boolean isLoginValid(User user) {
+    public void isLoginValid(User user) throws InvalidLoginException {
         Optional<User> findUser = userRepository.findByLoginId(user.getLoginId());
 
-        return findUser.isPresent();
+        log.info(findUser.toString());
+
+        if (!findUser.isPresent()) {
+            throw new InvalidLoginException("invalid login", ErrorCode.USER_NOT_FOUND);
+        }
     }
 
 
