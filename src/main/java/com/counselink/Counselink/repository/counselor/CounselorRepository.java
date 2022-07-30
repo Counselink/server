@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface CounselorRepository extends JpaRepository<Counselor, Long> {
 
-    Optional<Counselor> findByLoginIdAndLoginPassword(String loginId, String loginPassword);
+    Optional<Counselor> findByEmailAndLoginPassword(String loginId, String loginPassword);
 
     Optional<Counselor> findByLoginId(String loginId);
 
