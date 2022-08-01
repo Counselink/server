@@ -53,4 +53,9 @@ public class User {
         this.userName = userName;
     }
 
+    public void changeUserInfo(String email, String loginPassword) {
+        this.email = email;
+        this.loginPassword = loginPassword;
+    }
+
 }

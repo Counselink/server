@@ -78,4 +78,10 @@ public class UserService {
         User user = userRepository.findById(id).get();
         user.changeUserName(name);
     }
+
+    @Transactional
+    public void updateUserInfo(Long id, String email, String password) {
+        User user = userRepository.findById(id).get();
+        user.changeUserInfo(email, password);
+    }
 }
