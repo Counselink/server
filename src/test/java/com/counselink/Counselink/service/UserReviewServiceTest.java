@@ -29,7 +29,7 @@ class UserReviewServiceTest {
     public void 리뷰작성() {
         // 유저
         Address address = Address.builder().city("city").street("street").zipcode("zipcode").build();
-        User user = new User("name", "number", "email", "id", "password", address);
+        User user = new User("name", 1, "number", "email", "id", "password", address);
 
         em.persist(user);
 

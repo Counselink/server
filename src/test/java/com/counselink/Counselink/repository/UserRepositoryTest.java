@@ -24,7 +24,7 @@ class UserRepositoryTest {
     @Test
     public void 회원가입() {
         Address address = new Address("city", "street", "zipcode");
-        User user = new User("name", "number", "email", "id", "password", address);
+        User user = new User("name", 1, "number", "email", "id", "password", address);
         User savedUser = userRepository.save(user);
         Optional<User> byId = userRepository.findById(savedUser.getId());
 

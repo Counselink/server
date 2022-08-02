@@ -49,7 +49,7 @@ class ReserveServiceTest {
                 "category",  LocalDateTime.of(2022, 7, 15, 14,0), LocalDateTime.of(2022, 7, 15, 14,0), 10000, counselor);
 
         CounselInformation counselInformation2 = CounselInformation.createCounselInformation(
-                "category", LocalDateTime.of(2022, 7, 15, 14,0), LocalDateTime.of(2022, 7, 15, 14,0), 10000, counselor);
+                "category", LocalDateTime.of(2022, 7, 15, 14,0), LocalDateTime.of(2022, 7, 15, 14,30), 10000, counselor);
 
         em.persist(counselInformation1);
         em.persist(counselInformation2);

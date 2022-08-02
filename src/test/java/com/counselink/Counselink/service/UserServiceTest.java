@@ -20,8 +20,8 @@ class UserServiceTest {
     @Test
     public void 회원가입() {
         Address address = new Address("city", "street", "zipcode");
-        User user1 = new User("name1", "number", "email", "id", "password", address);
-        User user2= new User("name1", "number", "email", "id", "password", address);
+        User user1 = new User("name1", 1, "number", "email", "id", "password", address);
+        User user2= new User("name1", 1, "number", "email", "id", "password", address);
         clientService.join(user1);
         clientService.join(user2);
     }
