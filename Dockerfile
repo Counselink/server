@@ -5,4 +5,4 @@ WORKDIR /run/Counselink
 
 RUN ./gradlew build
 
-ENTRYPOINT ./gradlew bootRun
+ENTRYPOINT java -jar build/libs/Counselink-0.0.1-SNAPSHOT.jar
