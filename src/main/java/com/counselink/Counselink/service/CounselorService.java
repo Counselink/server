@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 
@@ -24,7 +25,7 @@ public class CounselorService {
 
     @Transactional
     public void isLoginValidV2(Counselor counselor) throws Exception {
-        Optional<Counselor> counselors = counselorRepository.findByLoginIdAndLoginPassword(counselor.getLoginId(), counselor.getLoginPassword());
+        Optional<Counselor> counselors = counselorRepository.findByEmailAndLoginPassword(counselor.getEmail(), counselor.getLoginPassword());
         if (!counselors.isPresent()) {
             throw new Exception("login is not valid");
         }
