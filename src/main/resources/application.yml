@@ -1,8 +1,8 @@
 spring:
   datasource:
-          url: jdbc:mysql://thismuch.cyzahi10wiz2.us-east-1.rds.amazonaws.com:3306/counselink?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: admin
-    password: thismuch1234!
+    url: 
+    username: 
+    password: 
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
