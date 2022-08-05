@@ -36,19 +36,19 @@ public class CounselInformation {
     private Reserve reserve;
 
     // Setter
-    public void setCategory(String category) {
+    private void setCategory(String category) {
         this.category = category;
     }
 
-    public void setCounselDate(LocalDateTime counselDate) {
+    private void setCounselDate(LocalDateTime counselDate) {
         this.counselDate = counselDate;
     }
 
-    public void setCounselStartTime(LocalDateTime counselStartTime) {
+    private void setCounselStartTime(LocalDateTime counselStartTime) {
         this.counselStartTime = counselStartTime;
     }
 
-    public void setPrice(Integer price) {
+    private void setPrice(Integer price) {
         this.price = price;
     }
 
