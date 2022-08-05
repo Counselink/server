@@ -17,7 +17,7 @@ public class CounselorApiController {
     private final CounselorRepository counselorRepository;
 
     @GetMapping("/api/homepage/counselor")
-    public Result<List<HomePageCounselorDto>> GetHomepageUserReview() {
+    public Result<List<HomePageCounselorDto>> GetHomepageCounselorCareer() {
         List<HomePageCounselorDto> counselorsWithImageUrl = counselorRepository.findCounselorsWithImageUrl();
 
         return new Result<>(counselorsWithImageUrl);
