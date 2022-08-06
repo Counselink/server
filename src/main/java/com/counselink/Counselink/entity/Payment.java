@@ -1,19 +1,16 @@
 package com.counselink.Counselink.entity;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
-@Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Payment {
-
+@onstructor(access = AccessLevel.PROTECTED)
+public class Payment {ÅÍÎ
     @Id
     @GeneratedValue
     @Column(name = "payment_id")
@@ -24,8 +21,8 @@ public class Payment {
     private String status;
     private LocalDateTime refundDate;
 
-    @OneToOne
-    @JoinColumn(name = "counselinformation_id")
-    private CounselInformation counselInformation;
+    @OneToMany(mappedBy = "payment")
+    private List<CounselInformation> counselInformationList = new ArrayList<>();
+
 
 }
